@@ -36,6 +36,9 @@ public class Human {
     public String toString() {
          return ("Name:" + name + " Age:" + age);
     }
+    public static String getRandomName(){
+        return names[(int)(Math.random()*(names.length-1))];
+    }
 
 
 }
