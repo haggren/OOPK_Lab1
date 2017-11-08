@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package human;
-
+import java.util.Arrays;
 /**
  *
  * @author hugo
@@ -32,7 +32,9 @@ public class HumansAndFysiker {
        for (int i=5; i<10; i++){
                 fysikerAndHumanList[i]=new Human();
                 
-            }     
+            }
+       Arrays.sort(fysikerAndHumanList);
+       
        for (Human i : fysikerAndHumanList) {
             System.out.println(i);
         }             

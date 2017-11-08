@@ -9,23 +9,22 @@ package human;
  *
  * @author hugo
  */
-public class Human {
-
+public class Human implements Comparable<Human> {
     /**
      * @param args the command line arguments
      */
    
-
+    
     private int age; 
     private String name;
     private static String[] names = {"Adam", "Bertil", "Cesar", "David", "Erik", "Filip", "Gustav","Helge","Ivar","Johan"};
     
     public Human(int ageIn, String nameIn){
-        this.age = ageIn;
-        this.name = nameIn;
+        age = ageIn;
+        name = nameIn;
     }
     public Human(){
-        this((int)(Math.random()*100),names[(int)(Math.random()*(names.length-1))]);
+        this((int)(Math.random()*100),getRandomName());
     }
     public int getAge() {
         return age;
@@ -33,12 +32,17 @@ public class Human {
     public String getName() {
         return name;
     }
+    @Override
     public String toString() {
          return ("Name:" + name + " Age:" + age);
     }
     public static String getRandomName(){
         return names[(int)(Math.random()*(names.length-1))];
     }
-
+    @Override
+    public int compareTo(Human testHuman){
+        return ((Integer)this.age).compareTo(testHuman.getAge());
+        
+    }
 
 }

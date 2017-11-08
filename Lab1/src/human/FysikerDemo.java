@@ -11,10 +11,10 @@ package human;
  */
 public class FysikerDemo {
        public static void main(String[] args) {
-        Fysiker numberOne = new Fysiker(25,"Achilles",2016);
-        System.out.println(numberOne.getAge());
-        System.out.println(numberOne.getName());
-        System.out.println(numberOne);
+        Fysiker numberOne = new Fysiker(25,"Achilles",2013);
+        Human numberTwo = new Human(22,"Johan");
+                
+       System.out.println(numberOne.compareTo(numberTwo));
     }  
 }
 

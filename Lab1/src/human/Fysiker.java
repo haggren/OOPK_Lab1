@@ -40,8 +40,22 @@ public class Fysiker extends Human{
     public int getYear(){
         return year;
     }
+    @Override
     public String toString(){
-        return ("Name:" + getName() + " Age:" + getAge() + " Årgång:" + getYear());
+
+        String year_str = Integer.toString(year);
+        String xx = year_str.substring(2,4);
+        String Argang = String.format("F%s",xx) ;
+        return ("Name:" + getName() + " Age:" + getAge() +" Årgång:" + Argang);
+    }
+    @Override
+    public int compareTo(Human testHuman){
+        if (testHuman instanceof Fysiker){
+            return ((Integer)this.year).compareTo(testHuman.getYear());
+        }
+        else {
+            return ((Integer)this.age).compareTo(testHuman.getAge());
+        }
     }
  }
 
