@@ -48,13 +48,33 @@ public class Fysiker extends Human{
         String Argang = String.format("F%s",xx) ;
         return ("Name:" + getName() + " Age:" + getAge() +" Årgång:" + Argang);
     }
-    @Override
-    public int compareTo(Human testHuman){
-        if (testHuman instanceof Fysiker){
-            return ((Integer)this.year).compareTo(testHuman.getYear());
+    /*public int compareTo(Fysiker testHuman){
+        int zero = 0;
+        if (testHuman instanceof Fysiker){  
+            if (((Integer)getAge()).compareTo(testHuman.getAge()) == zero) {
+                return ((Integer)getYear()).compareTo(testHuman.getYear());
+            }
+            else {
+                return ((Integer)getAge()).compareTo(testHuman.getAge());
+            }
         }
         else {
-            return ((Integer)this.age).compareTo(testHuman.getAge());
+            return ((Integer)getAge()).compareTo(testHuman.getAge());
+        }
+    }*/
+    @Override
+    public int compareTo(Human testHuman){
+    	int zero = 0;
+        if (testHuman instanceof Fysiker){
+            if  (((Integer)getAge()).compareTo(testHuman.getAge()) == zero ) {
+            	return ((Integer)getYear()).compareTo(((Fysiker) testHuman).getYear());
+            }
+            else {
+                return ((Integer)getAge()).compareTo(testHuman.getAge());    
+                    }
+        }
+        else {
+            return ((Integer)getAge()).compareTo(testHuman.getAge());
         }
     }
  }

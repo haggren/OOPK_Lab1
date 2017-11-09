@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package human;
-
+import java.util.Arrays;
 /**
  *
  * @author hugo
@@ -15,7 +15,7 @@ public class FysikerDemo2 {
        Fysiker[] fysikerList = new Fysiker[15];
        for (int i=0; i<15; i++){
             int count = 0;
-            int maxTries=15;
+            int maxTries=20;
                
             while (count <= maxTries){
                 try {
@@ -28,6 +28,7 @@ public class FysikerDemo2 {
                     }
                 }
        }
+       Arrays.sort(fysikerList);
        for (Fysiker fysikerList1 : fysikerList) {
             System.out.println(fysikerList1);
         }
