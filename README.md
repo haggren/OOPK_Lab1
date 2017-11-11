@@ -1,7 +1,7 @@
 # OOPK_Labbar
 
 # Lab1: 
-       Done
+       Redovisad
 
 # Lab2: 
        - E1: Done
