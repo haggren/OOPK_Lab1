@@ -6,5 +6,6 @@
 # Lab2: 
        - E1: Done
        - E2: Done
-       - E3: Halfway
+       - E3: Doneish (Lökig kod)
+       - E4: 
 
