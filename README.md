@@ -7,5 +7,5 @@
        - E1: Done
        - E2: Done
        - E3: Doneish (Lökig kod)
-       - E4: 
+       - E4: Done (Applets är lite funky)
 
