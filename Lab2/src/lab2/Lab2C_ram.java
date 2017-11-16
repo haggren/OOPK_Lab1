@@ -20,13 +20,16 @@ public class Lab2C_ram {
     public static void main(String[] args){
         
         int numButtons;
-        if(args.length>1){
+        if(args.length>1){ // Checks if multiple arguments have been sent
             throw new IllegalArgumentException("Multiple arguments!");
         }
         
-        try{
+        try{ // tries to convert the string to an integer
             numButtons = Integer.parseInt(args[0]);
         }catch(NumberFormatException e){
+            /* should an exception occur this is 
+            thrown
+            */
             throw new IllegalArgumentException("Argument not an integer!");    
         }
         
