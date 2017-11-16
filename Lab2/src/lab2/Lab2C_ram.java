@@ -16,9 +16,25 @@ import javax.swing.*;
 public class Lab2C_ram {
     
     private static JFrame frame;
-    
+
     public static void main(String[] args){
-        for (int i = 0; i < Integer.parseInt(args[0]); i++){
+        
+        int numButtons;
+        if(args.length>1){ // Checks if multiple arguments have been sent
+            throw new IllegalArgumentException("Multiple arguments!");
+        }
+        
+        try{ // tries to convert the string to an integer
+            numButtons = Integer.parseInt(args[0]);
+        }catch(NumberFormatException e){
+            /* should an exception occur this is 
+            thrown
+            */
+            throw new IllegalArgumentException("Argument not an integer!");    
+        }
+        
+        
+        for (int i = 0; i < numButtons; i++){
             MyButton x = new MyButton();
             frame.add(x);
             
