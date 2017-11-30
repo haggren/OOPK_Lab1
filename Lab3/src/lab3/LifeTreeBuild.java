@@ -70,26 +70,21 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
       JOptionPane.showMessageDialog( this, currNode.getText() );
    }
 
-  
+    public MyNode readNode() {
 
-    public static void main(String[] args) {
-        if (args.length > 0) {
-            katalog = args[0];
-        }
-        new LifeTreeBuild();
-    }
-    public static MyNode readNode() {
+        Scanner xmlScan = scanFile(); // Scanner 
+        xmlScan.nextLine(); //Skippar första xml-raden tekniska raden
+        String currLine = xmlScan.nextLine(); //Nuvarande rad vi är på
+        String[] attributes = makeAttributes(currLine); // Gör en matris med level, text och namn
+        String endTag = "/" + attributes[0]; // denfinierar sluttaggen </...>
 
-        Scanner xmlScan = scanFile();
-        xmlScan.nextLine(); //Skippar första xml-raden
-        String nextLine = "";
-        String currLine = xmlScan.nextLine();
-        String[] attributes = makeAttributes(currLine);
-        String endTag = "/" + attributes[0];
+        MyNode retNode = createNode(attributes); // Skapar Noden 
 
-        MyNode retNode = createNode(attributes);
-
-        nextLine = xmlScan.nextLine();
+        String nextLine = xmlScan.nextLine(); // Skapar nästa rad
+        /*
+        While loopen kollar om nästa rad är sluttaggen. Om den inte är det kallar den på
+        readNode som har argument.
+        */
         while (!cleanLine(nextLine).split(" ")[0].equals(endTag)) {
             readNode(retNode, nextLine, xmlScan);
             nextLine = xmlScan.nextLine();
@@ -98,7 +93,11 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
         return retNode;
 
     }
-    public static MyNode readNode(MyNode parent, String inLine, Scanner inScan) {
+    /*
+    Denna metod används för rekursion inuti readNode(), den är i princip likadan förutom att den
+    lägger till sin parentNode, och inte initierar nån scanner.
+    */
+    public MyNode readNode(MyNode parent, String inLine, Scanner inScan) {
 
         Scanner xmlScan = inScan;
         String nextLine = ""; //Temporär sträng
@@ -119,11 +118,9 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
 
     }
     
-    private static String[] makeAttributes(String inLine){
+    private String[] makeAttributes(String inLine){
         
         String line = cleanLine(inLine);
-        String name = getName(inLine);
-        
         String[] output = {line.split(" ",2)[0],line.split(" ",2)[1], getName(inLine)};
                 
         return output;
@@ -131,7 +128,7 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
         
     }
     
-    private static MyNode createNode(String[] inputs) {
+    private MyNode createNode(String[] inputs) {
 
         String name;
         String level;
@@ -149,7 +146,7 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
     }
 
     
- public static String getName(String argLine){
+ public String getName(String argLine){
        int citIndex = argLine.indexOf("\"");
        if(citIndex!=-1){
          String name = argLine.substring(citIndex+1, 
@@ -160,7 +157,7 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
        return empty;
        
    }
-    private static String cleanLine(String line) {
+    private String cleanLine(String line) {
         String outLine = line;
         outLine = outLine.replace("<", "");
         outLine = outLine.replace(">", "");
@@ -175,7 +172,7 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
         return outLine;
     }
     
-    private static Scanner scanFile() {
+    private Scanner scanFile() {
         Scanner sc;
         try {
             sc = new Scanner(new File("Liv.xml"));
@@ -186,7 +183,12 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
         return sc;
     }
 
-      
+  public static void main(String[] args) {
+        if (args.length > 0) {
+            katalog = args[0];
+        }
+        new LifeTreeBuild();
+    }    
 
    private JCheckBox box;
    private JTree tree;
