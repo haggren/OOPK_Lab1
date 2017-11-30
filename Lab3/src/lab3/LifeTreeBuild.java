@@ -140,7 +140,9 @@ public class LifeTreeBuild extends JFrame implements ActionListener {
         return new MyNode(name, text, level);
 
     }
-
+    /*
+    Denna metod existerar för att man ska kunna klara av namn med mellanslag i
+    */
     public String getName(String argLine) {
         int citIndex = argLine.indexOf("\"");
         if (citIndex != -1) {
