@@ -8,7 +8,6 @@ package lab5;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-import java.io.IOException;
 import  java.net.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,7 +23,7 @@ public class URLField extends TextField implements ActionListener {
     public URLField(ViewPane v){
         viewer = v;
         addActionListener(this);
-        this.setPreferredSize(new Dimension(800,25));
+        setPreferredSize(new Dimension(800,25));
     }
     
     public URL getURL(){
@@ -41,11 +40,7 @@ public class URLField extends TextField implements ActionListener {
             Logger.getLogger(URLField.class.getName()).log(Level.SEVERE, null, ex); // Autogenererad kod av netbeans, vettefan vad den gör
             
         }
+        viewer.navigate(url);
         
-        try {
-            viewer.setPage(url);
-        } catch (IOException ex) {
-            System.err.println("Attempted to read a bad URL: " + url);
-        }
     }
 }
