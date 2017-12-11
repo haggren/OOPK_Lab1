@@ -2,7 +2,6 @@
 package lab5;
 
 import javax.swing.*;
-import javax.swing.event.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -12,11 +11,11 @@ import java.awt.event.*;
  *
  * @author hugo
  */
-public class MainFrame extends JFrame implements HyperlinkListener{
+public class MainFrame extends JFrame {
     
     private URLField urlField;
     private ViewPane viewPane;
-    private JTextPane historyPane;
+    private HistoryPane historyPane;
     private JScrollPane scrollPane;
     private JPanel container;
     private JPanel navBarPanel;
@@ -34,7 +33,7 @@ public class MainFrame extends JFrame implements HyperlinkListener{
         scrollPane = createScrollPane(viewPane);
         urlField = new URLField(viewPane);
         closeButton = new CloseButton(this);
-        createHistoryPane();
+        historyPane = new HistoryPane(viewPane);
         
          
         handleLayout();
@@ -87,10 +86,7 @@ public class MainFrame extends JFrame implements HyperlinkListener{
         container.add(closeButton, gbc);
         gbc.gridy++;
         
-        gbc.weightx=1.0;
-        gbc.weighty=1.0;
-        gbc.fill = GridBagConstraints.NONE;
-        gbc.gridwidth = 2;
+        
     }
     
     /*
@@ -110,42 +106,11 @@ public class MainFrame extends JFrame implements HyperlinkListener{
         return navBarPanel;
     }
     
-    private void createHistoryPane(){
-        historyPane = new JTextPane();
-        historyPane.setVisible(false);
-        historyPane.setEditorKit(JEditorPane.createEditorKitForContentType("text/html"));
-        historyPane.setEditable(false);
-        historyPane.setPreferredSize(new Dimension(250,600));
-        historyPane.addHyperlinkListener(this);
-    }
-    
-    public void displayHistoryPane(){
-        if (!historyPane.isVisible()){
-            historyPane.setVisible(true);
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < viewPane.historyURL.size() ; i++){
-                
-                sb.append(("<a href=" + viewPane.historyURL.get(i).toString() +
-                            ">" + viewPane.historyURL.get(i).toString() + "</a>" + " <br>"));
-                
-                System.out.println(viewPane.historyURL.get(i).toString());
-            }
-            historyPane.setText(sb.toString());
-        }else{
-            historyPane.setVisible(false);
-        }
-            
-    }
-        
+
     public static void main(String[] args){
         new MainFrame();
     }
 
-
-    @Override
-    public void hyperlinkUpdate(HyperlinkEvent e) {
-        viewPane.hyperlinkUpdate(e);
-    }
     
 public class NavButton extends JButton implements ActionListener {
     
@@ -166,7 +131,7 @@ public class NavButton extends JButton implements ActionListener {
             viewPane.goForward();
         }
         if (getText().equals("HISTORY")){
-            displayHistoryPane();
+            historyPane.displayHistoryPane();
         }
     }
     

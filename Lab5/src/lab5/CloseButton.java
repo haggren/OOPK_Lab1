@@ -20,7 +20,7 @@ public class CloseButton extends JButton implements ActionListener {
 
     public CloseButton(JFrame frameIn) {
         frame = frameIn;
-        setText("Close this MESS");
+        setText("CLOSE");
         setBackground(Color.lightGray);
         addActionListener(this);
         setPreferredSize(new Dimension(200,50));

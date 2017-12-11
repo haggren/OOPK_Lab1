@@ -5,12 +5,10 @@
  */
 package lab5;
 
-import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
 import  java.net.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 /**
  *
  * @author hugo
@@ -37,7 +35,7 @@ public class URLField extends TextField implements ActionListener {
             url = new URL(getText());
         
         }   catch (MalformedURLException ex) {
-            Logger.getLogger(URLField.class.getName()).log(Level.SEVERE, null, ex); // Autogenererad kod av netbeans, vettefan vad den gör
+            System.err.println("Attempted to read a bad URL: " + url);
             
         }
         viewer.navigate(url);
