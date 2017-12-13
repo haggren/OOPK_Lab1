@@ -1,11 +1,20 @@
 # OOPK_Labbar
 
 # Lab1: 
-       Redovisad
+       - E del: Redovisad
+       - C del: Redovisad
 
 # Lab2: 
-       - E1: Done
-       - E2: Done
-       - E3: Doneish (Lökig kod)
-       - E4: Done (Applets är lite funky)
+       - E del: Redovisad
+       - C del: 
 
+# Lab3: 
+       - E del: Redovisad
+       - C del:
+# Lab4: 
+       - E del: Redovisad
+       - C del:
+# Lab5: 
+
+
+# Lab6: 
