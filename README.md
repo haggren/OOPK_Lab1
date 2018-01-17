@@ -15,6 +15,7 @@
        - E del: Redovisad
        - C del:
 # Lab5: 
-
+       - E del: Donezo
+       - C del:
 
 # Lab6: 
