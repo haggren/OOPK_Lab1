@@ -6,7 +6,7 @@
 
 # Lab2: 
        - E del: Redovisad
-       - C del: 
+       - C del: Donezo
 
 # Lab3: 
        - E del: Redovisad
