@@ -5,24 +5,24 @@
  */
 package lab2;
 
-import mybutton.MyButton;
+import mybutton.MyButton1;
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
 /**
  *
  * @author hugo
  */
-public class Lab2C_ram {
+public class Lab2C2 implements ActionListener {
     
-    private static JFrame frame;
-    private static Color[] colors = {Color.RED,Color.BLUE, Color.GRAY,Color.GREEN,Color.PINK,Color.ORANGE,Color.YELLOW};
-    private static String[] texts = {"Stockholm", "Göteborg","Malmö","Lund","Linköping","Umeå","Gävle","Uppsala","Södertälje"};
-
+    private JFrame frame;
+    private Color[] colors = {Color.RED,Color.BLUE, Color.GRAY,Color.GREEN,Color.PINK,Color.ORANGE,Color.YELLOW};
+    private String[] texts = {"Stockholm", "Göteborg","Malmö","Lund","Linköping","Umeå","Gävle","Uppsala","Södertälje"};
+    private MyButton1[] buttons;
+    private int numButtons;
     
-    public static void main(String[] args){
-        
-        int numButtons;
+    public Lab2C2(String[] args){
         frame = new JFrame();
         FlowLayout layout = new FlowLayout();
         frame.setLayout(layout);
@@ -39,24 +39,38 @@ public class Lab2C_ram {
             throw new IllegalArgumentException("Argument not an integer!");    
         }
         
-        createButtons(numButtons);
+        createButtons();
        
         frame.pack();
         frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
-    private static void createButtons(int numIn){
-        MyButton[] b = new MyButton[numIn];
-        for (int i = 0; i < numIn; i++){
-            b[i] = new MyButton(colors[(int)(Math.random()*(colors.length-1))],
+    private void createButtons(){
+        buttons = new MyButton1[numButtons];
+        for (int i = 0; i < numButtons; i++){
+            buttons[i] = new MyButton1(colors[(int)(Math.random()*(colors.length-1))],
                                       colors[(int)(Math.random()*(colors.length-1))],
                                       texts[(int)(Math.random()*(texts.length-1))],
                                       texts[(int)(Math.random()*(texts.length-1))]);
-            frame.add(b[i]);
+            buttons[i].addActionListener(this);
+            frame.add(buttons[i]);
             
         }
         
     }
     
+    public static void main(String[] args){
+        new Lab2C2(args);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        for (int i = 0; i < numButtons; i++){
+            if (!e.getSource().equals(buttons[i])){
+                buttons[i].toggleState();
+            }
+        }
+
+    }
   
 }

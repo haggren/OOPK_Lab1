@@ -15,20 +15,14 @@ import javax.swing.*;
  */
 public class Lab2_ram3 extends JApplet {
     //Called when this applet is loaded into the browser.
-
     @Override
     public void init() {
-        createGUI();
-    }
-
-    private void createGUI() {
-        //Create and set up the content pane.
-
         MyButton knapp = new MyButton();
-        knapp.setPreferredSize(new Dimension(600, 400));
+        knapp.setPreferredSize(new Dimension(300, 200));
         add(knapp);
-
         setVisible(true);
 
     }
+
+
 }

@@ -29,11 +29,7 @@ public class MyButton extends JButton implements ActionListener {
         firsttext = text1;
         sndtext = text2;
         addActionListener(this);
-//        addActionListener(new ActionListener() {
-//        public void actionPerformed(ActionEvent arg0) {
-//            toggleState();
-//        }
-//        });
+
 
     }
 

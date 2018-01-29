@@ -28,7 +28,6 @@ public class MyButton1 extends JButton {
         firsttext = text1;
         sndtext = text2;
 
-
     }
 
     public MyButton1() {
