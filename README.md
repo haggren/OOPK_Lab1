@@ -1,5 +1,5 @@
 # OOPK_Labbar
-
+OBS INGEN COPY PASTERINO (VILLE IM TALKING TO YOU)
 # Lab1: 
        - E del: Redovisad
        - C del: Redovisad
