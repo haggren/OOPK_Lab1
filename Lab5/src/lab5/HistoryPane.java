@@ -35,7 +35,7 @@ public class HistoryPane extends JTextPane implements HyperlinkListener{
                 sb.append(("<a href=" + viewPane.historyURL.get(i).toString() +
                             ">" + viewPane.historyURL.get(i).toString() + "</a>" + " <br>"));
                 
-                System.out.println(viewPane.historyURL.get(i).toString());
+                
             }
             this.setText(sb.toString());
         }else{

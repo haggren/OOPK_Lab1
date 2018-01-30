@@ -51,7 +51,9 @@ public class ViewPane extends JEditorPane implements HyperlinkListener {
             navigate(e.getURL());
         }
     }
-    
+    /**
+    * Navigerar till en ny sida.
+    */
     public void navigate(URL inURL){
         
         editHistory();  
@@ -82,7 +84,6 @@ public class ViewPane extends JEditorPane implements HyperlinkListener {
         if (currentURL != null) {
             if (!historyURL.contains(currentURL)) {
                 historyURL.push(currentURL);
-                System.out.println("Added to history" + currentURL);
             } else {
                 historyURL.remove(currentURL);
             }

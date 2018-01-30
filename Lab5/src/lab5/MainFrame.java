@@ -8,8 +8,9 @@ import java.awt.event.*;
 
 
 /**
- *
+ *  
  * @author hugo
+ * Huvudfönstret
  */
 public class MainFrame extends JFrame {
     
@@ -43,11 +44,11 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
     
-    /*
-    Skapar ett fönster som har scrollbar och lägger argumentet i den.
+    /**
+    * En metod som skapar ett fönster som har scrollbar och lägger argumentet i den.
     */
-    private JScrollPane createScrollPane(JEditorPane argPane){
-        JScrollPane scroller = new JScrollPane(argPane);
+    private JScrollPane createScrollPane(JEditorPane inPane){
+        JScrollPane scroller = new JScrollPane(inPane);
         scroller.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scroller.setPreferredSize(new Dimension(800, 600));
@@ -55,9 +56,9 @@ public class MainFrame extends JFrame {
         return scroller;
     }
     
-    /*
-    En riktig shitfest, denna metod sätter in allt i container och ser till att det ser snyggt ut
-    mha GridBagLayout vilket påstås vara den värsta swing klassen av dem alla.
+    /**
+    * En riktig shitfest, denna metod sätter in allt i container och ser till att det ser snyggt ut
+    * mha GridBagLayout vilket påstås vara den värsta swing klassen av dem alla.
     */
     private void handleLayout() {
         
@@ -89,12 +90,11 @@ public class MainFrame extends JFrame {
         
     }
     
-    /*
-    Skapar navigeringsraden
+    /**
+    * Skapar navigeringsraden (Del-C)
     */
     private JPanel createNavBar(){
         
-
         navBarPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
         back = new NavButton("BACK");
         history = new NavButton("HISTORY");
@@ -106,12 +106,14 @@ public class MainFrame extends JFrame {
         return navBarPanel;
     }
     
-
     public static void main(String[] args){
         new MainFrame();
     }
+    
 
     
+ 
+   
 public class NavButton extends JButton implements ActionListener {
     
     
