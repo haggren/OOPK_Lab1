@@ -18,7 +18,7 @@ public class View extends JPanel {
     public View(Model modelArg) {
         myModel = modelArg;
         setPreferredSize(new Dimension(X_SIZE, Y_SIZE));
-        this.setOpaque(true);
+        setOpaque(true);
 
         setVisible(true);
         repaint();
@@ -35,13 +35,11 @@ public class View extends JPanel {
             double x = positions[i] * X_SIZE;
             double y = positions[i + 1] * Y_SIZE;
             
-            g2.setPaint(Color.BLACK);
             g2.fill(new Ellipse2D.Double(x, y, 6, 6));
             //System.out.println(x + "," + y);
         }
         Toolkit.getDefaultToolkit().sync();
-        g2.setPaint(Color.RED);
-        g2.fill(new Ellipse2D.Double(0, 0, 6, 6));
+        
         
     }
 

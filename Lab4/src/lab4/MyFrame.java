@@ -17,7 +17,7 @@ public class MyFrame extends JFrame {
 
     public MyFrame() {
 
-        myModel = new Model(5);
+        myModel = new Model(10000);
         myView = new View(myModel);
         myController = new Controller(myModel, myView);
         myView.add(myController);

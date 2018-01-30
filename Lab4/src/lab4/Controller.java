@@ -4,12 +4,8 @@ package lab4;
 import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.*;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-import java.io.IOException;
+
 
 /**
  *
@@ -33,6 +29,7 @@ public class Controller extends JPanel implements ChangeListener, ActionListener
     private static final int DELTA_INIT = 50;
     private static final int X_SIZE = 800;
     private static final int Y_SIZE = 600;
+    private static final int logTime = 1000;
 
     public Controller(Model modelArg, View viewArg) {
 
@@ -41,9 +38,7 @@ public class Controller extends JPanel implements ChangeListener, ActionListener
         createFile();
         myTimer = new Timer(DELTA_INIT, this);
         myTimer.start();
-        if (timeElapsed >= 100){
-            myTimer.stop();
-        }
+        
         
         lengthSlider = new JSlider(JSlider.HORIZONTAL, L_MIN, L_MAX, L_INIT);
         lengthSlider.addChangeListener(this);
@@ -73,13 +68,16 @@ public class Controller extends JPanel implements ChangeListener, ActionListener
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
         myModel.updateTotalPosition();
         myView.repaint();
-        StringBuilder fileRow = createLogString(timeElapsed);
-        addToFile(fileRow);
-        timeElapsed = timeElapsed + deltaSlider.getValue();
-        System.out.println(timeElapsed);
+        if (timeElapsed <= logTime) {
+            StringBuilder fileRow = createLogString(timeElapsed);
+            addToFile(fileRow);
+            timeElapsed = timeElapsed + deltaSlider.getValue();
+              
+        } else {
+            outputStream.close();    
+        }
         
     }
     private StringBuilder createLogString(int timeIn){
@@ -90,7 +88,7 @@ public class Controller extends JPanel implements ChangeListener, ActionListener
             double x = positions[i] * X_SIZE;
             double y = positions[i + 1] * Y_SIZE;
             outputs.append(",");
-            outputs.append(x);
+            outputs.append(x); 
             outputs.append(",");
             outputs.append(y);
             
@@ -101,25 +99,16 @@ public class Controller extends JPanel implements ChangeListener, ActionListener
     
     private void createFile(){
         try{
-            outputStream = new PrintWriter(new FileWriter("characteroutput.csv"));
+            outputStream = new PrintWriter("/home/hugo/MATLAB/oopk/output.csv");
         }
         catch(Exception e){
              System.out.println("Error: " + e.toString());
         }
-        finally {
-            if (outputStream != null) {
-                outputStream.close();
-            }
-        }
+        
+        
     }   
     private void addToFile(StringBuilder input){
-
-
-            
-            outputStream.println(input);
-            
-     
-        
-        
+        outputStream.println(input);
+        outputStream.flush();
     }
 }

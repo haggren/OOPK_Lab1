@@ -27,7 +27,7 @@ public class Model {
         double[] positionArray = new double[particleArray.length * 2];
         int index = 0;
 
-        for (int i = 0; i < particleArray.length; i = i + 2) {
+        for (int i = 0; i < particleArray.length*2; i = i + 2) {
             positionArray[i] = particleArray[index].getX();
             positionArray[i + 1] = particleArray[index].getY();
             index++;
