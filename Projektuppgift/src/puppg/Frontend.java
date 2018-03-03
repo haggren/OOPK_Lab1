@@ -41,7 +41,8 @@ public class Frontend {
     public void showOptionPane() {
 
         String[] s = {"Server", "Client"};
-        userType = JOptionPane.showOptionDialog(null, "Server or Client?", "Pick one.", JOptionPane.DEFAULT_OPTION,
+        userType = JOptionPane.showOptionDialog(null, 
+                "Server or Client?", "Pick one.", JOptionPane.DEFAULT_OPTION,
                 JOptionPane.QUESTION_MESSAGE, null, s, s[0]);
 
     }
@@ -63,7 +64,7 @@ public class Frontend {
         if (a == 0) {
 
             //serverAddress = getIP();
-            serverAddress = "192.168.0.199";
+            serverAddress = "localhost";
             label = new JLabel("Server");
             label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
             JLabel ip = new JLabel("Your IP-address is: ");

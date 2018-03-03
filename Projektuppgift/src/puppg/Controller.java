@@ -29,7 +29,17 @@ public class Controller implements ActionListener{
             @Override
             public void run() {
                 while(true){
-                    receiveMessage();
+                    System.out.println("true shit");
+                    try{
+                        System.out.println("try it bro");
+                        receiveMessage();
+                        System.out.println("1");
+                        //receiveMessage();
+                        System.out.println("2");
+                    }
+                    catch(Exception AAA){
+                        System.out.println("börja om hela koden hugo " + AAA);
+                    }
                 }
             }
             
@@ -43,6 +53,7 @@ public class Controller implements ActionListener{
     }
     
     public void receiveMessage(){
+        System.out.println("3. attempted to receive");
         String s = myModel.receiveMessage();
         if (s != null){
             myView.showMessage(s);

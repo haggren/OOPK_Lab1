@@ -18,11 +18,11 @@ public class Client {
     // Strömmar för att läsa från/skriva till servern
     private PrintWriter out = null;
     private BufferedReader in = null;
-   
+    public Socket clientSocket = null;
     
     public Client(String address, int port){
         // Socket som ansluter till servern
-        Socket clientSocket = null;
+        
      
 
 	// Ström för att läsa från sendField
@@ -36,6 +36,7 @@ public class Client {
         try {
             clientSocket = new Socket(address, port);
             out = new PrintWriter(clientSocket.getOutputStream(), true);
+            out.flush();
             in = new BufferedReader(new InputStreamReader(
                                         clientSocket.getInputStream()));
         } catch (UnknownHostException e) {
@@ -76,16 +77,20 @@ public class Client {
     public void send(String text) throws UnsupportedEncodingException{
         
         
-        
+        System.out.println("CLIENT TEXT "+text);
         String userInput;
         
 
-        BufferedReader textIn = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes("UTF-8"))));
+        BufferedReader textIn = new BufferedReader(new InputStreamReader(
+                new ByteArrayInputStream(text.getBytes("UTF-8"))));
       
                                    
         try{
 	if ((userInput = textIn.readLine()) != null) {
+            out.flush();
 	    out.println(userInput);
+            System.out.println("CLIENT MESSAGE SENT LMAO");
+            out.flush();
             }
         }
         catch(Exception e){
@@ -95,11 +100,13 @@ public class Client {
     public String receive(){
         
         String s = null;
+        System.out.println("client receive");
         try{
                 s = in.readLine();
-                System.out.println(in.readLine());
+                //System.out.println(in.readLine());
 
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(e);}
         
         return s;
         

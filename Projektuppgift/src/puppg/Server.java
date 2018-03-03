@@ -49,6 +49,7 @@ public class Server{
 	try{
 	    out = new PrintWriter(
 				  clientSocket.getOutputStream(), true);
+            out.flush();
 	}catch(IOException e){
 	    System.out.println("getOutputStream failed: " + e);
 	    System.exit(1);
@@ -88,18 +89,24 @@ public class Server{
     
      public void send(String text) throws UnsupportedEncodingException{
         
-        
+         System.out.println("SERVER TEXT "+ text);
         
         String userInput;
         
+         System.out.println(text);
 
         BufferedReader textIn = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes("UTF-8"))));
       
                                    
 	// LÃ¤s in frÃ¥n terminalen och skicka till servern:
         try{
+        
 	if ((userInput = textIn.readLine()) != null) {
+            System.out.println(userInput);
+            System.out.println(text);
+            out.flush();
 	    out.println(userInput);
+            out.flush();
             
             }
         }
@@ -109,11 +116,15 @@ public class Server{
     }
     public String receive(){
         String s = null;
+        System.out.println("5. server receive");
         try{
+                System.out.println("6. We in here");
                 s = in.readLine();
-                System.out.println(in.readLine());
+                System.out.println("7. now we out here");
+                //System.out.println(in.readLine());
 
-        }catch(Exception e){}
+        }catch(Exception e){
+            System.out.println(e);}
         
         return s;
         
