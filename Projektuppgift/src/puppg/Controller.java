@@ -34,7 +34,7 @@ public class Controller implements ActionListener{
             }
             
         });
-        
+        thr.start();
     }
 
     public void sendMessage(String s){
@@ -44,15 +44,16 @@ public class Controller implements ActionListener{
     
     public void receiveMessage(){
         String s = myModel.receiveMessage();
-        myView.showMessage(s);
-                
+        if (s != null){
+            myView.showMessage(s);
+        }
     }
     
     public void updateChat(){
         
     }
     public String encrypt(){
-        return "";
+        return "crypto boii";
     }
     public String decrypt(){
         return "";

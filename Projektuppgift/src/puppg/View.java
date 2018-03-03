@@ -54,7 +54,7 @@ public class View extends JPanel{
         
         StyledDocument doc = receivePane.getStyledDocument();
 
-        Style style = receivePane.addStyle("I'm a Style", null);
+        Style style = receivePane.addStyle("Style", null);
 
         try { doc.insertString(doc.getLength(), ": "+ s +"\n",style);}
         catch (BadLocationException e){}
