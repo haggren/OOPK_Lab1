@@ -49,7 +49,7 @@ public class Model {
        
     }
     public String receiveMessage(){
-        System.out.println("received");
+        System.out.println("4. received");
         String s;
         if (userType == 0){
             s = server.receive();
