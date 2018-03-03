@@ -4,9 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.text.*;
-import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,24 +19,23 @@ import java.util.logging.Logger;
 public class View extends JPanel{
     
     private JTextPane receivePane;
+    JTextField sendField;
     private JScrollPane scroller;
+    //private Controller myController;
     private Model myModel;
-    private StyledDocument doc;
-    private SimpleAttributeSet keyWord;
     
     
     public View(Model m){
         
-        setPreferredSize(new Dimension(800,600));
+        setPreferredSize(new Dimension(800,500));
         setVisible(true);
         
         myModel = m;
         
-        receivePane = new JTextPane();
-        receivePane.setPreferredSize(new Dimension(800,400));
+        receivePane = new ReceivePane();
        
-       
-        
+        sendField = new JTextField();
+        sendField.setPreferredSize(new Dimension(800,100));
 
         scroller = new JScrollPane(receivePane);
         scroller.setVerticalScrollBarPolicy(
@@ -46,29 +43,22 @@ public class View extends JPanel{
         scroller.setPreferredSize(new Dimension(800, 400));
         scroller.setMinimumSize(new Dimension(800, 400));
         
-
-        add(scroller);
         
-        showMessage();
+        add(scroller);
+        add(sendField);
         
         
     }
-    public void showMessage(){
-//        try {
-//            receivePane.read(new InputStreamReader(
-//                    getClass().getResourceAsStream("/log.xml")),
-//                    null);
-//        } catch (Exception ex) {
-//           
-//        }
+    
+    public void showMessage(String s){
+        
+        StyledDocument doc = receivePane.getStyledDocument();
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                while (true) {
-                    receivePane.setText(myModel.receiveMessage());
-                }
-            }
-        });
+        Style style = receivePane.addStyle("I'm a Style", null);
+
+        try { doc.insertString(doc.getLength(), ": "+ s +"\n",style);}
+        catch (BadLocationException e){}
+        
         
     }
 

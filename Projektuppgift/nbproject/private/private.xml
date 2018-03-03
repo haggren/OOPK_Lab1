@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Hugo/Documents/NetBeansProjects/Projektuppgift/src/puppg/View.java</file>
+            <file>file:/C:/Users/Hugo/Documents/NetBeansProjects/Projektuppgift/src/puppg/Controller.java</file>
+            <file>file:/C:/Users/Hugo/Documents/NetBeansProjects/Projektuppgift/src/puppg/Frontend.java</file>
+            <file>file:/C:/Users/Hugo/Documents/NetBeansProjects/Projektuppgift/src/puppg/Client.java</file>
+            <file>file:/C:/Users/Hugo/Documents/NetBeansProjects/Projektuppgift/src/puppg/ChatThread.java</file>
+            <file>file:/C:/Users/Hugo/Documents/NetBeansProjects/Projektuppgift/src/puppg/Model.java</file>
+            <file>file:/C:/Users/Hugo/Documents/NetBeansProjects/Projektuppgift/src/puppg/Server.java</file>
+        </group>
     </open-files>
 </project-private>

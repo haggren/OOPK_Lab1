@@ -5,81 +5,55 @@
  */
 package puppg;
 
-import java.io.*;
-import java.net.*;
-import java.util.*;
-
 /**
  *
  * @author hugo
  */
-public class Server {
-    
+import java.io.*;
+import java.net.*;
+
+public class Server{
+
+    // StrÃ¶mmar fÃ¶r att lÃ¤sa/skriva
+    private PrintWriter out;
+    private BufferedReader in;
+    private BufferedReader stdIn;
+    // texten som lÃ¤ses in/skickas tillbaka
+    private String echo;
+
+    // Sockets till uppkopplingen
     private ServerSocket serverSocket;
-    private List<Socket> clientList;
-    
+    private Socket clientSocket = null;
+
 
 
     public Server(String address, int port){
 
-	// Starta serverns socket
+	// Koppla upp serverns socket
 	try {
 	    serverSocket = new ServerSocket(port);
 	} catch (IOException e) {
 	    System.out.println("Could not listen on port: " + port);
 	    System.exit(-1);
 	}
-        
-        clientList = new ArrayList();
 	
-	// Lyssna efter klienter.
-        // Varje gÃ¥ng en klient ansluter atartas en
-	// ny tråd av typen 'ChatThread', som sedan
-	// behandlar resten av kommunikationen
-	// EkotrÃ¥darna tar klientsocketen som argument
-	// fÃ¶r att veta vem som har anslutit sig
-	while(true){
-	    Socket clientSocket = null;
-	    try {
-		clientSocket = serverSocket.accept();
-                clientList.add(clientSocket);
-	    } catch (IOException e) {
-		System.out.println("Accept failed: " + port);
-		System.exit(-1);
-	    }
-	    Thread thr = new ChatThread(clientSocket);
-	    thr.start();
+	// Lyssna efter en klient
+	try {
+	    clientSocket = serverSocket.accept();
+	} catch (IOException e) {
+	    System.out.println("Accept failed: " + port);
+	    System.exit(-1);
 	}
-    }
-}
-class ChatThread extends Thread{
-     // Socket, lämnas via konstruktorn
-    private Socket clientSocket = null;
 
-    // Strömmar får att läsa/skriva till klienten
-    private PrintWriter out;
-    private BufferedReader in;
-
-    // Meddelandet som konverteras och skickas till alla clienter
-    private String echo;
-
-    // Konstruktorn sparar socketen lokalt
-    public ChatThread(Socket sock){
-	clientSocket = sock;
-    }
-
-    public void run(){
-
-	// Vi kÃ¶r tills vi Ã¤r klara
-	boolean done = false;
-
-	// Anslut läs- och skrivströmmarna
+	// Anslut till klienten
 	try{
-	    out = new PrintWriter(clientSocket.getOutputStream(), true);
+	    out = new PrintWriter(
+				  clientSocket.getOutputStream(), true);
 	}catch(IOException e){
 	    System.out.println("getOutputStream failed: " + e);
 	    System.exit(1);
 	}
+
 	try{
 	    in = new BufferedReader(new InputStreamReader(
 	            clientSocket.getInputStream()));
@@ -88,41 +62,60 @@ class ChatThread extends Thread{
 	    System.exit(1);
 	}
 
-	// Kommer vi hit gick anslutningen bra.
-	// Vi skriver ut IP-nummret från klienten
+	// Kommer vi hit har det gÃ¥tt bra
+	// Vi skriver ut IP-adressen till klienten
 	System.out.println("Connection Established: " 
 			   + clientSocket.getInetAddress());
 
-	// Här läser vi in klientens budskap
-	// och konverterar det till versaler
-	// Om klienten kopplar ner gör vi det också,
-	// och avslutar tråden
-	while(!done){
-	    try{
-		echo = in.readLine();
-		if(echo==null){
-		    System.out.println("Client disconnect!");
-		    done = true;
-		}else{
-		    System.out.println("Recieved: (" 
-                            + clientSocket.getInetAddress() 
-                            + ") " + echo);
-		    out.println(echo.toUpperCase());
-		}
-	    }catch(IOException e){
-		System.out.println("readLine failed: " + e);
-		System.exit(1);
-	    }
-	}
-
-	try{
-	    in.close();
-	    out.close();
-	    clientSocket.close();
-	}catch(IOException e){}
-    }
-    public void sendToAll(){
-        
+	// LÃ¤s frÃ¥n klienten och skicka tillbaka 
+	// medelandet i versaler tills klienten
+	// kopplar ner
+//	while(true){
+//	    try{
+//		echo = in.readLine();
+//		if(echo==null){
+//		    System.out.println("Client disconnect!");
+//		    System.exit(1);
+//		}
+//		System.out.println("Recieved: " + echo);
+//		out.println(echo.toUpperCase());
+//	    }catch(IOException e){
+//		System.out.println("readLine failed: " + e);
+//		System.exit(1);
+//	    }
+//	}
     }
     
+     public void send(String text) throws UnsupportedEncodingException{
+        
+        
+        
+        String userInput;
+        
+
+        BufferedReader textIn = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes("UTF-8"))));
+      
+                                   
+	// LÃ¤s in frÃ¥n terminalen och skicka till servern:
+        try{
+	if ((userInput = textIn.readLine()) != null) {
+	    out.println(userInput);
+            
+            }
+        }
+        catch(Exception e){ 
+            System.out.println("oh shit son sum tin wong");
+        }
+    }
+    public String receive(){
+        String s = null;
+        try{
+                s = in.readLine();
+                System.out.println(in.readLine());
+
+        }catch(Exception e){}
+        
+        return s;
+        
+    }
 }

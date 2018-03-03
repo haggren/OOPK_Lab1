@@ -18,7 +18,7 @@ public class Client {
     // Strömmar för att läsa från/skriva till servern
     private PrintWriter out = null;
     private BufferedReader in = null;
-    private BufferedReader stdIn;
+   
     
     public Client(String address, int port){
         // Socket som ansluter till servern
@@ -80,14 +80,12 @@ public class Client {
         String userInput;
         
 
-        stdIn = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes("UTF-8"))));
+        BufferedReader textIn = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(text.getBytes("UTF-8"))));
       
                                    
-	// LÃ¤s in frÃ¥n terminalen och skicka till servern:
         try{
-	while ((userInput = stdIn.readLine()) != null) {
+	if ((userInput = textIn.readLine()) != null) {
 	    out.println(userInput);
-            System.out.println(in.readLine());
             }
         }
         catch(Exception e){
@@ -98,10 +96,9 @@ public class Client {
         
         String s = null;
         try{
-        while ((stdIn.readLine()) != null) {
-             s = in.readLine();
-             System.out.println(in.readLine());
-        }
+                s = in.readLine();
+                System.out.println(in.readLine());
+
         }catch(Exception e){}
         
         return s;

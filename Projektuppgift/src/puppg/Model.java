@@ -14,70 +14,52 @@ import java.io.*;
  */
 public class Model {
     
+    private int userType;
     private Client client;
     private Server server;
     private PrintWriter outputStream;
     private File messageFile;
     
-    public Model(String address,int port, int userType){
+    public Model(String address,int port, int u){
+        userType = u;
         //om man är server
         if (userType == 0){
-            Thread thr1 = new Thread(new Runnable(){
-                @Override
-                public void run() {
-                    new Server(address,port);
-                }
-                
-            });
-            thr1.start();
+            server = new Server(address,port);
             
+        }else{
+            client = new Client(address,port);
         }
-        client = new Client(address,port);
-//        createFile();
-//        Thread thr2 = new Thread(new Runnable(){
-//                @Override
-//                public void run() {
-//                    receiveMessage();
-//                }
-//                
-//            });
-//        thr2.start();
+
     }
     
     public void sendMessage(String s){
-        try {
-            client.send(s);
-        } catch (UnsupportedEncodingException ex) {
-            System.out.println("Couldn't send message.");
+        if (userType == 0){
+             try {
+                server.send(s);
+            } catch (UnsupportedEncodingException ex) {
+                System.out.println("Couldn't send message.");
+            }
+        }else {
+            try {
+                client.send(s);
+            } catch (UnsupportedEncodingException ex) {
+                System.out.println("Couldn't send message.");
+            }
         }
+       
     }
     public String receiveMessage(){
         System.out.println("received");
-        String s =  client.receive();
+        String s;
+        if (userType == 0){
+            s = server.receive();
+        }else{
+        s =  client.receive();
         //addToFile(createLogString(s));
+        
+        }
         return s;
     }
     
-    private void createFile(){
-        try{
-            outputStream = new PrintWriter("log.xml");
-        }
-        catch(Exception e){
-             System.out.println("Error: " + e.toString());
-        }
-        
-        
-    }   
-    private void addToFile(String input){
-        outputStream.println(input + "trying to addtofile");
-        outputStream.flush();
-    }
-    
-    private String createLogString(String text){
-        
-        String outputs = "<message><text>" + text + "</text></message>";
-        System.out.println("Made a logstring");
-        
-        return outputs;
-    }
+
 }

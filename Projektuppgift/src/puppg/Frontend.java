@@ -61,13 +61,9 @@ public class Frontend {
         gbc.insets = new Insets(2, 2, 2, 2);
 
         if (a == 0) {
-//            try {
-//                serverAddress = getLocalHostLANAddress();  
-//            } catch (UnknownHostException ex) {
-//                System.out.println("Failure with IP address");
-//            }
+
             //serverAddress = getIP();
-            serverAddress = "130.229.133.11";
+            serverAddress = "192.168.0.199";
             label = new JLabel("Server");
             label.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 30));
             JLabel ip = new JLabel("Your IP-address is: ");
@@ -143,25 +139,20 @@ public class Frontend {
 
         chatFrame = new JFrame("Chat with your friends!");
         chatFrame.setLayout(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
+        GridBagConstraints gbc = new GridBagConstraints(); 
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.insets = new Insets(2, 2, 2, 2);
         chatFrame.setVisible(true);
         chatFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
+
         myModel = new Model(serverAddress, port, userType);
-        myController = new Controller(myModel);
-        Thread thr = new Thread(new Runnable(){
-            public void run(){
-                myView = new View(myModel);
-                chatFrame.add(myView, gbc);
-            }
-        });
-        thr.start();
+        myView = new View(myModel); 
+        myController = new Controller(myModel, myView);
+
+        chatFrame.add(myView, gbc);
         gbc.gridy++;
-        chatFrame.add(myController, gbc);
+
         chatFrame.pack();
         
         

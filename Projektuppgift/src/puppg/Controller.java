@@ -13,26 +13,55 @@ import java.awt.event.*;
  *
  * @author hugo
  */
-public class Controller extends JPanel implements ActionListener{
+public class Controller implements ActionListener{
     
-    private JTextField sendField;
+
     private Model myModel;
+    private View myView;
+
     
-    
-    public Controller(Model m){
-        setPreferredSize(new Dimension(800,100));
+    public Controller(Model m, View v){
         myModel = m;
-        sendField = new JTextField();
-        sendField.setPreferredSize(new Dimension(800,100));
-        add(sendField);
-        sendField.addActionListener(this);
+        myView = v;
+        myView.sendField.addActionListener(this);
+        
+        Thread thr = new Thread(new Runnable(){
+            @Override
+            public void run() {
+                while(true){
+                    receiveMessage();
+                }
+            }
+            
+        });
+        
+    }
+
+    public void sendMessage(String s){
+        myModel.sendMessage(s);
+        myView.showMessage(s);
+    }
+    
+    public void receiveMessage(){
+        String s = myModel.receiveMessage();
+        myView.showMessage(s);
+                
+    }
+    
+    public void updateChat(){
+        
+    }
+    public String encrypt(){
+        return "";
+    }
+    public String decrypt(){
+        return "";
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        String s = sendField.getText();
-        myModel.sendMessage(s);
-        sendField.setText("");
+        sendMessage(((JTextField)e.getSource()).getText());
+        ((JTextField)e.getSource()).setText("");
+        
     }
-   
 }
