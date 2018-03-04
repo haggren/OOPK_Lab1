@@ -11,28 +11,9 @@ import javax.swing.*;
  */
 public class Test {
     public static void main(String[] args){
-//        JFrame frame = new JFrame();
-//        String[] s = {"Server","Client"};
-//        JOptionPane p = new JOptionPane("Server or Client?");
-//        
-//        p.setOptions(s);
-//        frame.add(p);
-//        frame.pack();
-//        frame.setVisible(true);
-//        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
-
-
-//        String[] s = {"Server","Client"};
-//        int userType = JOptionPane.showOptionDialog(null,"Server or Client?","Pick one.",JOptionPane.DEFAULT_OPTION,
-//                                        JOptionPane.QUESTION_MESSAGE,null,s,s[0]);
-//        System.out.println(userType);
-            
-            JFrame f = new JFrame();
-            
-            JLabel l = new JLabel("hejhejhej");
-            f.add(l);
-            f.pack();
-            f.setVisible(true);
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Message mess = new Message("<message sender=\"Anon\"><text color=\"-16777216\">hello guys whatsup</text></message>");
+//        System.out.println(mess.getText());
+//        System.out.println(mess.getName());
+        
     }
 }

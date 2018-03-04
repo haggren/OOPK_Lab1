@@ -20,6 +20,8 @@ public class View extends JPanel{
     
     private JTextPane receivePane;
     JTextField sendField;
+    JTextField nameField;
+    JTextField colorField;
     private JScrollPane scroller;
     //private Controller myController;
     private Model myModel;
@@ -30,12 +32,23 @@ public class View extends JPanel{
         setPreferredSize(new Dimension(800,500));
         setVisible(true);
         
+        setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        
+        
         myModel = m;
         
         receivePane = new ReceivePane();
        
+        nameField = new JTextField("Name",15);
+        
+        colorField = new JTextField("Color",15);
+        
+        
         sendField = new JTextField();
-        sendField.setPreferredSize(new Dimension(800,100));
+        sendField.setPreferredSize(new Dimension(800,50));
 
         scroller = new JScrollPane(receivePane);
         scroller.setVerticalScrollBarPolicy(
@@ -43,20 +56,26 @@ public class View extends JPanel{
         scroller.setPreferredSize(new Dimension(800, 400));
         scroller.setMinimumSize(new Dimension(800, 400));
         
+        add(nameField,gbc);
+        gbc.gridy++;
+        add(colorField,gbc);
+        gbc.gridy++;
         
-        add(scroller);
-        add(sendField);
+        add(scroller,gbc);
+        gbc.gridy++;
+        add(sendField,gbc);
         
         
     }
     
-    public void showMessage(String s){
+    public void showMessage(Message m){
         
         StyledDocument doc = receivePane.getStyledDocument();
 
         Style style = receivePane.addStyle("Style", null);
-
-        try { doc.insertString(doc.getLength(), ": "+ s +"\n",style);}
+        StyleConstants.setForeground(style, m.getColor());
+        
+        try { doc.insertString(doc.getLength(), m.getName() + ": "+ m.getText() +"\n",style);}
         catch (BadLocationException e){}
         
         
