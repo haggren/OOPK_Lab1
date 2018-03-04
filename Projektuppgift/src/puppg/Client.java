@@ -29,6 +29,7 @@ public class Client {
 //	BufferedReader stdIn;
 //	String userInput;
 
+
         // Måste vara ett input
 	
 
