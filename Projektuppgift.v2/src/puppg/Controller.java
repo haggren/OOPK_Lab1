@@ -20,6 +20,7 @@ public class Controller implements ActionListener{
     private View myView;
     private String userName = "Anon";
     private Color textColor = Color.BLACK;
+    private boolean running = true;
     
     public Controller(Model m, View v){
         myModel = m;
@@ -43,7 +44,7 @@ public class Controller implements ActionListener{
         Thread thr = new Thread(new Runnable(){
             @Override
             public void run() {
-                while(true){
+                while(running){
                    
                     System.out.println("true shit");
                     try{
@@ -71,7 +72,11 @@ public class Controller implements ActionListener{
     
     public void receiveMessage(){
         System.out.println("3. attempted to receive");
-        Message m = new Message(myModel.receiveMessage());
+        Message m = myModel.receiveMessage();
+        if(m.getDisconnect()){
+            running = false;
+            
+        }
         System.out.println("received: " + m.getText());
         myView.showMessage(m);
        
