@@ -3,8 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/home/hugo/NetBeansProjects/Projektuppgift/src/puppg/Controller.java</file>
-            <file>file:/home/hugo/NetBeansProjects/Projektuppgift/src/puppg/Frontend.java</file>
+            <file>file:/Users/maxoliveberg/NetBeansProjects/hugo/OOPK_Labbar/Projektuppgift.v2/src/puppg/Frontend.java</file>
+            <file>file:/Users/maxoliveberg/NetBeansProjects/hugo/OOPK_Labbar/Projektuppgift.v2/src/puppg/View.java</file>
+            <file>file:/Users/maxoliveberg/NetBeansProjects/hugo/OOPK_Labbar/Projektuppgift.v2/src/puppg/Model.java</file>
+            <file>file:/Users/maxoliveberg/NetBeansProjects/hugo/OOPK_Labbar/Projektuppgift.v2/src/puppg/Controller.java</file>
         </group>
     </open-files>
 </project-private>

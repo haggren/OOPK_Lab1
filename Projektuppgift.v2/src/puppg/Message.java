@@ -6,6 +6,7 @@
 package puppg;
 
 import java.awt.Color;
+import static java.awt.Color.*;
 import java.io.StringReader;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,6 +26,7 @@ public class Message {
     private Color textColor;
     private String xmlMessage;
     private String text;
+    private boolean isDisconnect;
     
     public Message(String msg, String name,Color inCol){
         userName = name;
@@ -39,8 +41,36 @@ public class Message {
                     +hex+"\">"+msg + "</text></message>";
         
     }
-    public Message(String xmlArg){
+    
+    
+    
+        public Message(String name, String text){
+        userName = name;
+        textColor = Color.BLACK;
+        text = text;
         
+        int r = textColor.getRed();
+        int g = textColor.getGreen();
+        int b = textColor.getBlue();
+        String hex = String.format("#%02X%02X%02X", r, g, b);
+        xmlMessage = "<message sender=\"" + userName + "\">" +"<text color=\""
+                    +hex+"\">"+text + "</text></message>";
+        
+    }
+    
+ 
+    public  void setDisconnect(){
+        isDisconnect = true;
+        
+    }
+    
+    public boolean getDisconnect(){
+        return isDisconnect;
+    }
+            
+    public Message(String xmlArg){
+        //System.out.println("New message being made");
+        //System.out.println("raw message text: "+ xmlArg);
         String[] msg = null;
         try {
             msg = xmlParse(xmlArg);
@@ -49,6 +79,7 @@ public class Message {
         }
         
         userName = msg[2];
+        //System.out.println("username: " + userName);
         textColor = Color.decode(msg[1]);
         text = msg[0];
 
@@ -89,13 +120,21 @@ public class Message {
     
     public String[] xmlParse(String xml) throws Exception{
         
-        DocumentBuilder db = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        
+        
+        DocumentBuilder db = DocumentBuilderFactory.newInstance().
+                newDocumentBuilder();
         InputSource is = new InputSource();
         is.setCharacterStream(new StringReader(xml));
         Document doc = db.parse(is);
+        //System.out.println("sout doc : " +doc);
         NodeList nodes = doc.getElementsByTagName("message");
+        //System.out.println("sout nodes : " + nodes);
         Element mess = (Element) nodes.item(0);
-        String name = mess.getAttribute("name");
+        /*
+        girls_laughing.jpg
+        */
+        String name = mess.getAttribute("sender");
         Node textnode = mess.getFirstChild();
         Element textel = (Element) textnode;
         String textattr = textel.getAttribute("color");
