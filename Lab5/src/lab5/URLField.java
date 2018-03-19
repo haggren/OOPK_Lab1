@@ -8,6 +8,7 @@ package lab5;
 import java.awt.event.*;
 import java.awt.*;
 import  java.net.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,7 +36,8 @@ public class URLField extends TextField implements ActionListener {
             url = new URL(getText());
         
         }   catch (MalformedURLException ex) {
-            System.err.println("Attempted to read a bad URL: " + url);
+            JOptionPane.showMessageDialog(null,
+                "The URL you entered seems to be wonky.");
             
         }
         viewer.navigate(url);

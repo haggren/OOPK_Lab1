@@ -21,16 +21,16 @@ public class MainFrame extends JFrame {
     private JPanel container;
     private JPanel navBarPanel;
     private JButton closeButton;
-    private NavButton back;
-    private NavButton forward;
-    private NavButton history;
+    private BackButton back;
+    private ForwardButton forward;
+    private HistoryButton history;
     
     
     public MainFrame(){
         super("Webbrowser");
         container = new JPanel();
-        container.setPreferredSize(new Dimension(1200,900));
-        viewPane = new ViewPane();
+        container.setPreferredSize(new Dimension(1000,800));
+        viewPane = new ViewPane(this);
         scrollPane = createScrollPane(viewPane);
         urlField = new URLField(viewPane);
         closeButton = new CloseButton(this);
@@ -42,8 +42,16 @@ public class MainFrame extends JFrame {
         pack();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        viewPane.goToHomepage();
     }
-    
+    public void updateAllButtons(){
+        back.updateButton();
+        forward.updateButton();
+        history.updateButton();
+    }
+    public void setURL(String url){
+        urlField.setText(url);
+    }
     /**
     * En metod som skapar ett fönster som har scrollbar och lägger argumentet i den.
     */
@@ -96,15 +104,17 @@ public class MainFrame extends JFrame {
     private JPanel createNavBar(){
         
         navBarPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 10));
-        back = new NavButton("BACK");
-        history = new NavButton("HISTORY");
-        forward = new NavButton("FORWARD");
+        back = new BackButton(viewPane);
+        history = new HistoryButton(viewPane,historyPane);
+        forward = new ForwardButton(viewPane);
+        forward.setEnabled(false);
         navBarPanel.add(back);
         navBarPanel.add(history);
         navBarPanel.add(forward);
 
         return navBarPanel;
     }
+    
     
     public static void main(String[] args){
         new MainFrame();

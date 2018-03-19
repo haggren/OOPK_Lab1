@@ -26,22 +26,20 @@ public class ViewPane extends JEditorPane implements HyperlinkListener {
     public Stack<URL> previousURL;
     public Stack<URL> forwardURL;
     public Stack<URL> historyURL;
+    private MainFrame main;
+    
    
-    public ViewPane() {
+    public ViewPane(MainFrame frame) {
         setPreferredSize(new Dimension(800, 600));
         previousURL = new Stack<URL>();
         forwardURL = new Stack<URL>();
         historyURL = new Stack<URL>();
+        main = frame; 
         
-        try {
-            homeURL= new URL("https://www.kth.se/utbildning/civilingenjor/teknisk-fysik/studenter-berattar/patrik-teknisk-fysik-300-hp-1.766608");
-        } catch (MalformedURLException ex) {
-            System.err.println("Attempted to read a bad URL: " + currentURL);
-        }
         setEditable(false);
         addHyperlinkListener(this);
-        navigate(homeURL);
-       
+        
+        
     }
 
     public void hyperlinkUpdate(HyperlinkEvent e) {
@@ -51,17 +49,29 @@ public class ViewPane extends JEditorPane implements HyperlinkListener {
             navigate(e.getURL());
         }
     }
+    public void goToHomepage(){
+        try {
+            homeURL= new URL("https://www.kth.se/");
+        } catch (MalformedURLException ex) {
+            JOptionPane.showMessageDialog(null,
+                "The URL you entered seems to be wonky.");
+        }
+        navigate(homeURL);
+    }
     /**
     * Navigerar till en ny sida.
-    */
+    */  
     public void navigate(URL inURL){
         
         editHistory();  
+        main.updateAllButtons();
+        main.setURL(inURL.toString());
         currentURL=inURL;
         try {
             setPage(currentURL);
         } catch (IOException ex) {
-            System.err.println("Attempted to read a bad URL: " + currentURL);
+            JOptionPane.showMessageDialog(null,
+                "The URL you entered seems to be wonky.");
         }
     }
     
